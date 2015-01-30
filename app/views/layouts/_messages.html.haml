@@ -1,0 +1,5 @@
+- flash.each do |type, message|
+  %div{:class => "alert #{alert_class_for(type)} alert-dismissible fade in"}
+    %span.close{"data-dismiss" => "alert",class: "close", :"aria-hidden" => "true"} ×
+    %span.sr-only Close
+    = message

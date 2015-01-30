@@ -1,0 +1,34 @@
+
+!!!
+%html
+%head
+%meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
+%title= content_for?(:title) ? yield(:title) : "RGAmazon"
+%meta{:content => content_for?(:description) ? yield(:description) : "RGAmazon", :name => "Book store"}
+= stylesheet_link_tag :application, :media => "all"
+= javascript_include_tag :application
+= csrf_meta_tags
+= yield(:head)
+%body
+%header.navbar.navbar-fixed-top
+  - if user_signed_in?
+    %span
+      Hello, #{current_user.email}
+    = link_to 'Logout', destroy_user_session_path, :method => :delete
+    = link_to "Admin panel", rails_admin.index_path('Book'), class: "btn btn-sm btn-info pull-right" if current_user.admin?
+  - else
+    = link_to 'Login', new_user_session_path
+    or #{link_to 'Registration', new_user_registration_path}
+  %button.btn-default.pull-right= link_to_unless_current raw("English"), locale: "en"
+  %button.btn-default.pull-right= link_to_unless_current raw("Russian"), locale: "ru"
+%nav.navbar-inner
+.container
+%a.brand{:href => "/"} Home
+#main{:role => "main"}
+.container
+.content
+.row
+.span12
+= render 'layouts/messages'
+= yield
+%footer

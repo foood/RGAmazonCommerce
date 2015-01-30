@@ -1,0 +1,15 @@
+.row-fluid
+  .span4.offset2
+    = form_for Author.new do |f|
+
+      .field
+        = f.label :first_name
+        = f.text_field :first_name
+      .field
+        = f.label :last_name
+        = f.text_field :last_name
+      .field
+        = f.label :biography
+        = f.text_area :biography, :size => "18x6"
+      .actions
+        = f.submit nil, class: "btn"
